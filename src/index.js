@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import parse from './parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
   const data1 = parse(filepath1);
   const data2 = parse(filepath2);
 
-  const keys = [...new Set([...Object.keys(data1), ...Object.keys(data2)])].sort();
+  const keys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));
 
   const lines = keys.map((key) => {
     if (!(key in data2)) {
