@@ -81,3 +81,10 @@ test('gendiff plain format', () => {
   const filepath2 = getFixturePath('file2.json');
   expect(genDiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain);
 });
+
+test('gendiff json format', () => {
+  const filepath1 = getFixturePath('file1.json');
+  const filepath2 = getFixturePath('file2.json');
+  const result = genDiff(filepath1, filepath2, 'json');
+  expect(() => JSON.parse(result)).not.toThrow();
+});
