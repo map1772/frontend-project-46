@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-const formatValue = value => {
+const formatValue = (value) => {
   if (_.isPlainObject(value)) {
     return '[complex value]'
   }
@@ -12,8 +12,8 @@ const formatValue = value => {
 
 const formatPlain = (diff, path = '') => {
   const lines = diff
-    .filter(node => node.type !== 'unchanged')
-    .map(node => {
+    .filter((node) => node.type !== 'unchanged')
+    .map((node) => {
       const fullPath = path ? `${path}.${node.key}` : node.key
 
       switch (node.type) {

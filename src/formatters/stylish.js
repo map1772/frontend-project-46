@@ -15,7 +15,7 @@ const stringify = (value, depth) => {
 }
 
 const formatStylish = (diff, depth = 1) => {
-  const lines = diff.map(node => {
+  const lines = diff.map((node) => {
     switch (node.type) {
       case 'nested':
         return `${indent(depth)}${node.key}: {\n${formatStylish(node.children, depth + 1)}\n${indent(depth)}}`
