@@ -1,11 +1,11 @@
-import { fileURLToPath } from 'url';
-import path from 'path';
-import genDiff from '../src/index.js';
+import { fileURLToPath } from 'url'
+import path from 'path'
+import genDiff from '../src/index.js'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename)
 
 const expected = `{
     common: {
@@ -50,19 +50,7 @@ const expected = `{
         }
         fee: 100500
     }
-}`;
-
-test('gendiff nested json', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  expect(genDiff(filepath1, filepath2)).toEqual(expected);
-});
-
-test('gendiff nested yaml', () => {
-  const filepath1 = getFixturePath('file1.yml');
-  const filepath2 = getFixturePath('file2.yml');
-  expect(genDiff(filepath1, filepath2)).toEqual(expected);
-});
+}`
 
 const expectedPlain = `Property 'common.follow' was added with value: false
 Property 'common.setting2' was removed
@@ -74,17 +62,29 @@ Property 'common.setting6.ops' was added with value: 'vops'
 Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
-Property 'group3' was added with value: [complex value]`;
+Property 'group3' was added with value: [complex value]`
+
+test('gendiff nested json', () => {
+  const filepath1 = getFixturePath('file1.json')
+  const filepath2 = getFixturePath('file2.json')
+  expect(genDiff(filepath1, filepath2)).toEqual(expected)
+})
+
+test('gendiff nested yaml', () => {
+  const filepath1 = getFixturePath('file1.yml')
+  const filepath2 = getFixturePath('file2.yml')
+  expect(genDiff(filepath1, filepath2)).toEqual(expected)
+})
 
 test('gendiff plain format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  expect(genDiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain);
-});
+  const filepath1 = getFixturePath('file1.json')
+  const filepath2 = getFixturePath('file2.json')
+  expect(genDiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain)
+})
 
 test('gendiff json format', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const result = genDiff(filepath1, filepath2, 'json');
-  expect(() => JSON.parse(result)).not.toThrow();
-});
+  const filepath1 = getFixturePath('file1.json')
+  const filepath2 = getFixturePath('file2.json')
+  const result = genDiff(filepath1, filepath2, 'json')
+  expect(() => JSON.parse(result)).not.toThrow()
+})
